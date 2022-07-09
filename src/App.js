@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React from "react";
+import BlogsPage from "./pages/BlogsPage/BlogsPage";
+import MainPage from "./pages/mainPage/MainPage";
+import LoginPage from "./pages/loginPage/LoginPage";
+import Blog from "./components/blog/Blog";
+import LayOut from './components/outlet/LayOut';
+import LayOutBack from './components/outlet/LayOutBack';
+import About from './components/about/About';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+
+        <Routes>
+          <Route  path="/" element={<LayOut/>}>
+            <Route index element={<MainPage/>}/>
+            <Route path="blogs" element={<BlogsPage/>}/>
+          </Route>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/" element={<LayOutBack/>}>
+            <Route path="/blogs/:id" element={<Blog/>}/>
+            <Route path="about" element={<About/>}/>
+          </Route>
+
+        </Routes>
+      </BrowserRouter>
+
   );
 }
 
